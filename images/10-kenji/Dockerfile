@@ -16,7 +16,8 @@ RUN dnf install -y \
     ranger \
     && rm -rf /etc/ssh/*key*
 
-RUN groupadd --gid 1100 rancher \
+RUN sed -i 's/locked//g' /etc/shadow \
+    && groupadd --gid 1100 rancher \
     && groupadd --gid 1101 docker \
     && useradd -u 1100 -g rancher -G docker,wheel -m -s /bin/zsh rancher \
     && useradd -u 1101 -g docker -G docker,wheel -m -s /bin/bash docker \

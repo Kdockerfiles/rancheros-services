@@ -1,5 +1,5 @@
 console:
-    image: kdockerfiles/rancheros-console-kenji:v1.0.4-1
+    image: kdockerfiles/rancheros-console-kenji:v1.0.4-2
     command: ros console-init
     privileged: true
     labels:
