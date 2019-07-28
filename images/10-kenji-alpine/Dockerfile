@@ -5,8 +5,17 @@ COPY sshd_config.append.tpl /etc/ssh/
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --no-cache \
+    bash \
+    busybox-suid \
+    curl \
+    git \
+    iproute2 \
+    htop \
+    less \
     openssh \
     ranger \
+    rsync \
+    util-linux \
     vim \
     zsh \
     && \
