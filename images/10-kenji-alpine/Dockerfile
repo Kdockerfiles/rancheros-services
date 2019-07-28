@@ -25,7 +25,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     adduser -D -u 1100 -g rancher -G rancher -s /bin/zsh rancher && \
     adduser rancher wheel && \
     adduser rancher docker && \
-    adduser -D -u 1101 -g docker -G docker -s /bin/zsh docker && \
+    adduser -D -u 1101 -g docker -G docker -s /bin/bash docker && \
     sed -i 's/rancher:!/rancher:*/g' /etc/shadow && \
     sed -i 's/docker:!/docker:*/g' /etc/shadow && \
     ln -s /bin/ps /usr/bin/ps && \
