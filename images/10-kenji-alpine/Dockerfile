@@ -1,4 +1,4 @@
-FROM alpine:20190707
+FROM alpine:20190809
 LABEL maintainer="KenjiTakahashi <kenji.sx>"
 
 COPY sshd_config.append.tpl /etc/ssh/
@@ -11,10 +11,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     git \
     iproute2 \
     htop \
+    keychain \
     less \
     openssh \
+    python2 \
     ranger \
     rsync \
+    tmux \
     util-linux \
     vim \
     zsh \
@@ -32,5 +35,15 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     cat /etc/ssh/sshd_config > /etc/ssh/sshd_config.tpl && \
     cat /etc/ssh/sshd_config.append.tpl >> /etc/ssh/sshd_config.tpl && \
     rm -f /etc/ssh/sshd_config.append.tpl /etc/ssh/sshd_config
+
+USER rancher
+
+RUN cd ~ && \
+    git clone --recursive https://github.com/KenjiTakahashi/dotfiles && \
+    cd dotfiles && \
+    sed -i '33d' dotzshrc && \
+    ./populate.py kiera.json -r
+
+USER root
 
 ENTRYPOINT ["/usr/bin/ros", "entrypoint"]
