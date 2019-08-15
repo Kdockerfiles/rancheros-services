@@ -8,10 +8,13 @@ console:
         io.docker.compose.rebuild: "false"
         io.rancher.os.console: kenji-alpine
     volumes_from:
-        - all-volumes
+        - container-data-volumes
+        - command-volumes
+        - media-volumes
+        - system-volumes
     volumes:
-        - /media:/media:shared
-        - /mnt:/mnt:shared
+        - /opt:/opt
+        - /var/lib/kubelet:/var/lib/kubelet
     restart: always
     pid: host
     ipc: host
